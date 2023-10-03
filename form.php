@@ -71,7 +71,7 @@ button {
   margin-left: 0.5em;
 }
 </style>
- <form  action="thanks.php"  method="post">
+ <form  action="/thanks.php"  method="post">
     <div>
       <label  for="nom">Nom :</label>
       <input  type="text"  id="nom"  name="last_name" required="true">
