@@ -70,6 +70,41 @@ button {
      le même espace qu'entre les libellés et les champs. */
   margin-left: 0.5em;
 }
+<?php
+
+    $errors = [];
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if(!isset($_POST['user-name']) || trim($_POST['last_name']) === '') 
+            $errors[] = "Le nom est obligatoire";
+        if(!isset($_POST['user_first_name']) || trim($_POST['first_name']) === '') 
+            $errors[] = "Le prénom est obligatoire";
+        if(!isset($_POST['user_email']) || trim($_POST['user_email']) === '') 
+            $errors[] = "L'email' est obligatoire";
+            if(!isset($_POST['user_phone']) || trim($_POST['tel']) === '') 
+            $errors[] = "Le numéro de téléphone est obligatoire";
+            if(!isset($_POST['sujet']) || trim($_POST['sujet']) === '') 
+            $errors[] = "Le sujet est obligatoire";
+            if(!isset($_POST['user_message']) || trim($_POST['user_message']) === '') 
+            $errors[] = "Le message est obligatoire";
+        if(!filter_var(($_POST['user_email']), FILTER_VALIDATE_EMAIL)) {
+          $errors[] = "L'adresse n'est pas au bon format.";
+        }
+        if(empty($errors)) {
+            header('Location: thanks.php');
+        }
+    }
+  ?>
+<?php // Affichage des éventuelles erreurs 
+      if (count($errors) > 0) : ?>
+        <div class="border border-danger rounded p-3 m-5 bg-danger">
+            <ul>
+                <?php foreach ($errors as $error) : ?>
+                    <li><?= $error ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+<?php endif; ?>
 </style>
  <form  action="/thanks.php"  method="post">
     <div>
